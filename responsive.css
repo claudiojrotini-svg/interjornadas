@@ -1,0 +1,243 @@
+/* ==========================================================================
+   INTERJORNADAS CASCAVEL — RESPONSIVIDADE
+   Desktop (padrão) -> Tablet (<=1024px) -> Mobile (<=640px)
+   ========================================================================== */
+
+/* ==========================================================================
+   TABLET — até 1024px
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .form-row,
+  .form-row-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+
+  .page-content {
+    padding: var(--space-5);
+  }
+
+  /* Sidebar vira overlay deslizante em vez de empurrar o conteúdo */
+  .sidebar {
+    transform: translateX(-100%);
+    width: var(--sidebar-width);
+    box-shadow: var(--shadow-modal);
+  }
+
+  .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+
+  .sidebar.collapsed {
+    width: var(--sidebar-width);
+  }
+
+  .sidebar.collapsed .brand-text,
+  .sidebar.collapsed .nav-label {
+    opacity: 1;
+    width: auto;
+    pointer-events: auto;
+  }
+
+  .main-area,
+  .sidebar.collapsed ~ .main-area {
+    margin-left: 0;
+  }
+
+  .topbar-menu-toggle {
+    display: flex;
+  }
+
+  .sidebar-footer .collapse-btn {
+    display: none;
+  }
+}
+
+/* ---- Overlay escuro quando o menu mobile está aberto ---- */
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 95;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+@media (max-width: 1024px) {
+  .sidebar-backdrop.open {
+    display: block;
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   MOBILE — até 640px
+   ========================================================================== */
+@media (max-width: 640px) {
+  html { font-size: 15px; }
+
+  .topbar {
+    padding: 0 var(--space-4);
+    gap: var(--space-3);
+  }
+
+  .topbar-search {
+    max-width: none;
+  }
+
+  .page-content {
+    padding: var(--space-4);
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .page-header .btn {
+    width: 100%;
+  }
+
+  .stat-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+  }
+
+  .stat-card {
+    flex-direction: column;
+    text-align: center;
+    padding: var(--space-4);
+  }
+
+  .stat-card .stat-value {
+    font-size: 1.4rem;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-box {
+    max-width: 100%;
+    max-height: 92vh;
+  }
+
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    padding: var(--space-4);
+  }
+
+  .modal-footer {
+    flex-direction: column-reverse;
+  }
+
+  .modal-footer .btn {
+    width: 100%;
+  }
+
+  /* ---- Tabelas em scroll horizontal no mobile ---- */
+  .table-wrap {
+    overflow-x: auto;
+  }
+
+  .data-table {
+    min-width: 560px;
+  }
+
+  .toast-container {
+    left: var(--space-4);
+    right: var(--space-4);
+    bottom: var(--space-4);
+  }
+
+  .toast {
+    min-width: 0;
+    max-width: none;
+    width: 100%;
+  }
+
+  .select-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+
+  /* ---- Tela da partida ao vivo: placar empilha no mobile ---- */
+  .match-live-scoreboard {
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .match-live-score {
+    order: -1;
+  }
+
+  .match-players-cols {
+    grid-template-columns: 1fr !important;
+  }
+
+  .entity-stats-row {
+    flex-wrap: wrap;
+  }
+}
+
+/* ==========================================================================
+   MOBILE PEQUENO — até 380px
+   ========================================================================== */
+@media (max-width: 380px) {
+  .stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  h1 { font-size: 1.6rem; }
+
+  .topbar-search {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   PRINT — súmula / classificação para impressão
+   ========================================================================== */
+@media print {
+  .sidebar,
+  .topbar,
+  .btn,
+  .entity-card-actions,
+  .toast-container,
+  .filter-bar,
+  .modal-overlay {
+    display: none !important;
+  }
+
+  .main-area {
+    margin-left: 0 !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  .card,
+  .table-wrap {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+
+  .data-table th {
+    background: #f0f0f0 !important;
+    color: #000 !important;
+  }
+
+  .data-table td {
+    color: #000 !important;
+  }
+}
